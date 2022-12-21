@@ -87,7 +87,7 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
 	return (
 		<>
 			<Button variant="solid" colorScheme="teal" size="sm" onClick={onOpen}>
-				Добавить счёт
+				Добавить
 			</Button>
 
 			<Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
