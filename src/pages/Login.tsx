@@ -17,9 +17,10 @@ import {
 import { PasswordField } from "../components/PasswordField";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../auth/useAuth";
+import Toast from '../components/Toast';
 
 const Login = () => {
-	const { user, signIn } = useAuth();
+	const { user, error, signIn } = useAuth();
 
 	const navigate = useNavigate();
 
@@ -93,6 +94,7 @@ const Login = () => {
 					</form>
 				</Box>
 			</Stack>
+			{ error && <Toast title={error} status='error' /> }
 		</Container>
 	);
 };
