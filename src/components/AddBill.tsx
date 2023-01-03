@@ -23,6 +23,7 @@ import {
 import { push, ref } from "firebase/database";
 import { database, storage } from "../firebase";
 import FileUpload from "./FileUpload";
+import { useData } from '../store/store';
 
 type AddBillModalProps = {
 	pathname: string;
@@ -38,7 +39,9 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
 		paid: 0,
 	});
 	const [isLoading, setIsLoading] = useState(false);
-
+	
+	const fetchData = useData((state: any) => state.fetchData);
+	
 	const initialRef = useRef(null);
 
 	const changeHandler = (
@@ -78,6 +81,9 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
 			.then(() => {
 				setData({ date: "", billUrl: "", comment: "", paid: 0 });
 				onClose();
+			})
+			.then(() => {
+				fetchData(pathname).then(() => {});
 			})
 			.catch((error) => {
 				console.log(error);

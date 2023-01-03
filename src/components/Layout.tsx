@@ -34,7 +34,7 @@ const links = [
 		path: "/repair",
 	},
 	{
-		id: 2,
+		id: 3,
 		label: "Копилка",
 		path: "/moneybox",
 	},
