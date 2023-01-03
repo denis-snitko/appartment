@@ -18,6 +18,7 @@ type ListingProps = {
 };
 
 const Listing: FC<ListingProps> = ({ data }) => {
+
 	const totalSum =
 		data && data.map((item) => item.paid).reduce((sum, elem) => sum + elem, 0);
 
@@ -26,7 +27,7 @@ const Listing: FC<ListingProps> = ({ data }) => {
 			<Table variant="striped" size="sm">
 				<Thead>
 					<Tr>
-						<Th isNumeric>№</Th>
+						<Th isNumeric w={20}>№</Th>
 						<Th>Дата</Th>
 						<Th>Комментарий</Th>
 						<Th>Чек (ссылка)</Th>

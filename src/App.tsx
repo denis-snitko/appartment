@@ -11,6 +11,7 @@ import Repair from "./pages/Repair";
 import { RequireAuth } from "./auth/RequireAuth";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from './auth/AuthProvider';
+import Moneybox from "./pages/Moneybox";
 
 export default function App() {
   const myTheme = extendTheme({
@@ -39,6 +40,12 @@ export default function App() {
                 <Repair />
               </RequireAuth>}
             />
+		  <Route
+			  path="moneybox"
+			  element={<RequireAuth>
+				  <Moneybox />
+			  </RequireAuth>}
+		  />
           </Route>
 
           <Route path="*" element={<NotFound />} />
