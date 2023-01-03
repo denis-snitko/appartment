@@ -68,9 +68,9 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
 	};
 
 	const submitHandler = (pathname: string) => {
-		const { date, paid, billUrl } = data;
+		const { date, paid } = data;
 
-		if (!date || !paid || !billUrl) {
+		if (!date || !paid) {
 			return;
 		}
 

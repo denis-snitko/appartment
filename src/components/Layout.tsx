@@ -33,6 +33,11 @@ const links = [
 		label: "Ремонт",
 		path: "/repair",
 	},
+	{
+		id: 2,
+		label: "Копилка",
+		path: "/moneybox",
+	},
 ];
 
 const NavLink = ({ path, children }: { path: string; children: ReactNode }) => (
