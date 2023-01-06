@@ -20,7 +20,7 @@ type ListingProps = {
 const Listing: FC<ListingProps> = ({ data }) => {
 
 	const totalSum =
-		data && data.map((item) => item.paid).reduce((sum, elem) => sum + elem, 0);
+		data && data.map((item) => item.paid).reduce((sum, elem) => sum + elem, 0).toFixed(2);
 
 	return (
 		<TableContainer>

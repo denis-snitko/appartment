@@ -12,7 +12,7 @@ const Moneybox = () => {
   const fetchData = useData((state: any) => state.fetchData);
   
   const totalSum =
-    entities && entities.map((item: Data) => item.paid).reduce((sum: any, elem: any) => sum + elem, 0);
+    entities && entities.map((item: Data) => item.paid).reduce((sum: any, elem: any) => sum + elem, 0).toFixed(2);
   
   useEffect(() => {
     fetchData(pathname).then(() => {});
