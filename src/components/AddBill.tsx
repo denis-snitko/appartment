@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import {
   Button,
   FormControl,
@@ -20,15 +20,10 @@ import { push, ref } from 'firebase/database';
 import { database, storage } from '../firebase';
 import FileUpload from './FileUpload';
 import { useData } from '../store/store';
-
-type AddBillModalProps = {
-  pathname: string;
-};
+import { AddBillModalProps } from '../types';
 
 const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const entities = useData((state: any) => state?.entities);
-  const lastPaid = entities?.[entities.length - 1]?.paid;
 
   const [data, setData] = useState({
     date: '',
@@ -88,17 +83,9 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
       });
   };
 
-  useEffect(() => {
-    if (pathname === '/moneybox') {
-      setData((prev) => ({ ...prev, paid: lastPaid + 0.01 }));
-    } else {
-      setData((prev) => ({ ...prev, paid: lastPaid }));
-    }
-  }, [lastPaid, pathname]);
-
   return (
     <>
-      <Button variant="solid" colorScheme="teal" size="sm" onClick={onOpen}>
+      <Button variant='solid' colorScheme='teal' size='sm' onClick={onOpen}>
         Добавить
       </Button>
 
@@ -111,10 +98,10 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
             <FormControl>
               <FormLabel>Дата</FormLabel>
               <Input
-                type="date"
+                type='date'
                 ref={initialRef}
-                placeholder="Дата"
-                name="date"
+                placeholder='Дата'
+                name='date'
                 onChange={(event) => {
                   changeHandler(event);
                 }}
@@ -131,39 +118,36 @@ const AddBillModal: FC<AddBillModalProps> = ({ pathname }) => {
 									changeHandler(event);
 								}}
 							/> */}
-                <FileUpload isLoading={isLoading} name="billUrl" uploadHandler={uploadHandler} />
+                <FileUpload isLoading={isLoading} name='billUrl' uploadHandler={uploadHandler} />
               </FormControl>
             )}
             <FormControl mt={4}>
               <FormLabel>Сумма</FormLabel>
               <Input
-                placeholder="Сумма"
-                name="paid"
+                placeholder='Сумма'
+                name='paid'
                 onChange={(event) => {
                   changeHandler(event);
                 }}
                 value={data.paid}
-                // defaultValue={pathname === '/moneybox' ? lastPaid + 0.01 : lastPaid}
               />
             </FormControl>
-            {pathname !== '/moneybox' && (
-              <FormControl mt={4}>
-                <FormLabel>Комментарий</FormLabel>
-                <Textarea
-                  name="comment"
-                  placeholder="Комментарий"
-                  size="sm"
-                  onChange={(event) => {
-                    changeHandler(event);
-                  }}
-                />
-              </FormControl>
-            )}
+            <FormControl mt={4}>
+              <FormLabel>Комментарий</FormLabel>
+              <Textarea
+                name='comment'
+                placeholder='Комментарий'
+                size='sm'
+                onChange={(event) => {
+                  changeHandler(event);
+                }}
+              />
+            </FormControl>
           </ModalBody>
 
           <ModalFooter>
             <Button
-              colorScheme="blue"
+              colorScheme='blue'
               mr={3}
               isLoading={isLoading}
               disabled={isLoading}

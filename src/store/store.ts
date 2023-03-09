@@ -8,18 +8,18 @@ export const useData = create(
     entities: [],
     status: null,
     error: null,
-    
+
     fetchData: async (endpoint: string) => {
       const dbRef = ref(database);
       const resultData: any = [];
-      
+
       set({ status: 'loading' });
-      
+
       await get(child(dbRef, `apartment/${endpoint}`))
         .then((snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val();
-            
+
             for (const key in data) {
               if (Object.prototype.hasOwnProperty.call(data, key)) {
                 const element = {
@@ -29,17 +29,18 @@ export const useData = create(
                 resultData.push(element);
               }
             }
+            set({ status: 'success' });
           } else {
+            set({ status: 'error' });
             console.log('No data available');
           }
-          set({ status: 'success' });
         })
         .catch((error) => {
           set({ status: 'error' });
           console.error(error);
         });
-      
+
       set({ entities: resultData });
     },
-  })),
+  }))
 );
